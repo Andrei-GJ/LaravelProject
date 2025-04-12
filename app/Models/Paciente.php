@@ -22,6 +22,17 @@ class Paciente extends Model
         'correo',
     ];
 
+    // If the primary key is not 'id', specify it here
+    protected $primaryKey = 'id';
+
+    // If the primary key is not auto-incrementing, set this to false
+    public $incrementing = true;
+
+    // If the primary key is not an integer, set the key type
+    protected $keyType = 'int';
+
+    protected $table = 'pacientes'; // Ensure this matches your database table name
+
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
@@ -31,17 +42,17 @@ class Paciente extends Model
     {
         return $this->belongsTo(TipoDocumento::class);
     }
-
+    
     public function genero()
     {
         return $this->belongsTo(Genero::class);
     }
-
+    
     public function departamento()
     {
         return $this->belongsTo(Departamento::class);
     }
-
+    
     public function municipio()
     {
         return $this->belongsTo(Municipio::class);

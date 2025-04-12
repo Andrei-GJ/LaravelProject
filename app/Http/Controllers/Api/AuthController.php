@@ -12,11 +12,11 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('home');
         }
 
-        return $this->respondWithToken($token);
+        return back()->withErrors(['email' => 'Credenciales incorrectas']);
     }
 
     public function me()
